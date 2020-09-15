@@ -64,7 +64,15 @@ int main( int argc, char *argv[] )
 	char	mess[200];
 	
 
-	//Usage( argc, argv );
+	//Validacion de la entrada
+	
+	if(argc!=5){
+	
+	printf("La cantidad de parametros ingresada es invalida %d\n",argc);
+	return 0;
+	}
+	printf("\n============================\n");
+	printf("\n==========Bievenido %s==========\n\n",argv[1]);
 	node_ID=atoi(argv[1]);
 	max_nodes=atoi(argv[2]);
 	printf("Cantidad maxima de nodos: %d\n",max_nodes);
@@ -73,7 +81,9 @@ int main( int argc, char *argv[] )
 	msg_len=atoi(argv[4]);
 	printf("Longitud del mensaje: %d\n",msg_len);
 	msg_recibidos=0;
-	
+	printf("\n============================\n");
+	sleep(3);
+
 	/* connecting to the daemon, requesting group information */
 	ret = SP_connect( Spread_name, User, 0, 1, &Mbox, Private_group );
 	if( ret < 0 ) 
@@ -95,7 +105,7 @@ int main( int argc, char *argv[] )
 	msg_recibidos++;
 	printf("\nMiembros restantes %d\n",max_nodes-msg_recibidos);
 
-	}while( /*!Is_regular_mess( ret ) ||*/ msg_recibidos!=max_nodes);
+	}while( msg_recibidos!=max_nodes);
 	msg_recibidos=0;
 	printf("\n============================\n");	
 	printf("\nTodos los miembros se encuentran conectados\n");
@@ -109,9 +119,10 @@ int main( int argc, char *argv[] )
 			printf("\nComienza el intercambio de mensajes Nº: %d \n",i+1);
 			strcpy(mess, argv[4]);
 			mess_len = strlen(mess);
+			sleep(2);
 			ret = SP_multicast( Mbox, AGREED_MESS, "simple_group", 1, mess_len, mess);
 			printf("Mensaje  %d  enviado\n",i+1);
-			sleep(10);
+			
 			do{
 				ret = Read_message();
 				msg_recibidos++;	
@@ -128,12 +139,7 @@ int main( int argc, char *argv[] )
 	printf("\n==============FIN============\n");
 
 	return 0;
-	/* 
-	 * reading a message.
-	 * Note that the first message will be the membreship caused by
-	 * the join (if group information was requested at connect time).
-	 * If that was the case, we read another message.
-	 */
+	
 	
 }
 
@@ -165,13 +171,13 @@ static	char		mess[102400];
 	{
 		/* A regular message, sent by one of the processes */
 		mess[ret] = 0;
-		if     ( Is_unreliable_mess( service_type ) ) printf("received UNRELIABLE ");
-		else if( Is_reliable_mess(   service_type ) ) printf("received RELIABLE ");
-		else if( Is_fifo_mess(       service_type ) ) printf("received FIFO ");
-		else if( Is_causal_mess(     service_type ) ) printf("received CAUSAL ");
-		else if( Is_agreed_mess(     service_type ) ) printf("received AGREED ");
-		else if( Is_safe_mess(       service_type ) ) printf("received SAFE ");
-		printf("message from %s of type %d (endian %d), to %d groups \n(%d bytes): %s\n",
+		if     ( Is_unreliable_mess( service_type ) ) printf("received UNRELIABLE \n");
+		else if( Is_reliable_mess(   service_type ) ) printf("received RELIABLE \n");
+		else if( Is_fifo_mess(       service_type ) ) printf("received FIFO \n");
+		else if( Is_causal_mess(     service_type ) ) printf("received CAUSAL \n");
+		else if( Is_agreed_mess(     service_type ) ) printf("received AGREED \n");
+		else if( Is_safe_mess(       service_type ) ) printf("received SAFE \n");
+		printf("mensaje de %s del tipo %d (endian %d), para %d grupos \n(%d bytes): %s\n",
 			sender, mess_type, endian_mismatch, num_groups, ret, mess );
 
 	}else if( Is_membership_mess( service_type ) ){
@@ -184,11 +190,11 @@ static	char		mess[102400];
                 }
 		if     ( Is_reg_memb_mess( service_type ) )
 		{
-			printf("received REGULAR membership ");
-			if( Is_caused_join_mess( service_type ) ) printf("caused by JOIN ");
-			if( Is_caused_leave_mess( service_type ) ) printf("caused by LEAVE ");
-			if( Is_caused_disconnect_mess( service_type ) ) printf("caused by DISCONNECT ");
-			printf("for group %s with %d members:\n",
+			printf("received REGULAR membership \n");
+			if( Is_caused_join_mess( service_type ) ) printf("Se ha UNIDO \n");
+			if( Is_caused_leave_mess( service_type ) ) printf("Nos ha DEJADO \n");
+			if( Is_caused_disconnect_mess( service_type ) ) printf("Se ha DESCONECTADO \n");
+			printf("al grupo %s con %d miembros:\n",
 				sender, num_groups );
 			for( i=0; i < num_groups; i++ )
 				printf("\t%s\n", &target_groups[i][0] );
@@ -202,29 +208,3 @@ static	char		mess[102400];
 	return( service_type );
 }
 
-static	void	Usage(int argc, char *argv[])
-{
-	
-
-	/* Setting defaults 
-	sprintf( User, "simple" );
-	sprintf( Spread_name, "3333");
-	while( --argc > 0 )
-	{
-		argv++;
-
-		if( !strncmp( *argv, "-u", 2 ) )
-		{
-			strcpy( User, argv[1] );
-			argc--; argv++;
-		}else if( !strncmp( *argv, "-s", 2 ) ){
-			strcpy( Spread_name, argv[1] ); 
-			argc--; argv++;
-		}else{
-			printf( "Usage: user\n%s\n%s\n",
-				"\t[-u <user name>]  : unique (in this machine) user name",
-				"\t[-s <address>]    : either port or port@machine");
-			exit(1);
-		 }
-	 }*/
-}
