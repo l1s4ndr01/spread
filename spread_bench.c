@@ -137,7 +137,6 @@ int main( int argc, char *argv[] )
 	msg_recibidos=0;
 	printf("\n============================\n");	
 	printf("\nTodos los miembros se encuentran conectados\n");
-	printf("\n============================\n");
 	
 	if((time(&t_inicial))==-1){
 				printf("\nFallo la medicion del tiempo\n");
@@ -199,10 +198,11 @@ static	char		mess[102400];
 	int		i;
 	int		ret;
 
-	printf("\n============================\n");
+	
         service_type = 0;
 	ret = SP_receive( Mbox, &service_type, sender, 100, &num_groups, target_groups, 
 		&mess_type, &endian_mismatch, sizeof(mess), mess );
+	printf("Mensaje recibido de %s", sender);
 	if( ret < 0 ) 
 	{
 		SP_error( ret );
