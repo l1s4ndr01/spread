@@ -120,7 +120,7 @@ int main( int argc, char *argv[] )
 	msg_recibidos_inicio++;
 	//printf("\nMiembros restantes %d\n",max_nodes-msg_recibidos);
 
-	}while( msg_recibidos_inicio<=max_nodes);
+	}while( msg_recibidos_inicio<max_nodes);
 	//envio de mensaje de sincronización
 
 	printf("Se envió el mensaje de sincronización\n");
