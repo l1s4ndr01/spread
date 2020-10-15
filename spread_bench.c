@@ -202,7 +202,7 @@ static	char		mess[102400];
         service_type = 0;
 	ret = SP_receive( Mbox, &service_type, sender, 100, &num_groups, target_groups, 
 		&mess_type, &endian_mismatch, sizeof(mess), mess );
-	printf("Mensaje recibido de %s", sender);
+	printf("Mensaje recibido de %s\n", sender);
 	if( ret < 0 ) 
 	{
 		SP_error( ret );
