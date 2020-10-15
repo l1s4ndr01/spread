@@ -167,8 +167,8 @@ int main( int argc, char *argv[] )
 	t_acumulado=difftime(t_final,t_inicial);
 
 	printf("\n==============Resultados============\n");
-	printf("\nEl tiempo acumulado es: %lE seg \n",t_acumulado);
-	printf("\nEl total de bytes transmitidos fue: %ld byte \n",msg_count*msg_len);
+	printf("\nEl tiempo acumulado es: %.2lf seg \n",t_acumulado);
+	printf("\nEl total de bytes transmitidos fue: %ld bytes \n",msg_count*msg_len);
 	printf("\nEl throughput del sistema es: %lf [bytes/seg]\n",(msg_count*msg_len)/t_acumulado);
 	printf("\n==============FIN============\n");
 
