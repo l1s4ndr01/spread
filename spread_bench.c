@@ -50,7 +50,7 @@
 #include <string.h>
 #include <time.h>
 
-static	char	User[80];
+char	User[80];
 static  char    Spread_name[80];
 static  char    Private_group[MAX_GROUP_NAME];
 static  mailbox Mbox;
