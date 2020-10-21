@@ -225,7 +225,7 @@ static	char		mess[102400];
 		
 		//sprintf(full_name,"#%s#%s",User,Spread_name);
 		//printf("Nombre completo: %s\n", full_name);
-		if ( strstr(sender,User)== null){
+		if ( strstr(sender,User)== NULL){
 			if     ( Is_unreliable_mess( service_type ) ) printf("received UNRELIABLE \n");
 			else if( Is_reliable_mess(   service_type ) ) printf("received RELIABLE \n");
 			else if( Is_fifo_mess(       service_type ) ) printf("received FIFO \n");
