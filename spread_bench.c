@@ -215,6 +215,8 @@ static	char		mess[102400];
 		mess[ret] = 0;
 		
 		//No imprime los mensajes enviados por él mismo
+		printf("%s envio el mensaje\n", sender);
+		printf("%s recibió el mensaje\n", User);
 		if ( !strcmp(User,sender)){
 			if     ( Is_unreliable_mess( service_type ) ) printf("received UNRELIABLE \n");
 			else if( Is_reliable_mess(   service_type ) ) printf("received RELIABLE \n");
