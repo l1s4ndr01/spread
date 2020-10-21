@@ -131,7 +131,7 @@ int main( int argc, char *argv[] )
 			
 	mess_len = strlen(mess);
 			
-	ret = SP_multicast( Mbox, AGREED_MESS, "simple_group", 1, mess_len, mess);
+	ret = SP_multicast( Mbox, CAUSAL_MESS, "simple_group", 1, mess_len, mess);
 	ret = Read_message();
 	
 	msg_recibidos=0;
@@ -152,7 +152,7 @@ int main( int argc, char *argv[] )
 			strncpy(mess,diccionario, msg_len);
 			mess_len = strlen(mess);
 			
-			ret = SP_multicast( Mbox, AGREED_MESS, "simple_group", 1, mess_len, mess);
+			ret = SP_multicast( Mbox, CAUSAL_MESS, "simple_group", 1, mess_len, mess);
 			printf("Mensaje  %d  enviado\n",i+1);
 			
 			do{
