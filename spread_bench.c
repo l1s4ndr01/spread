@@ -222,9 +222,10 @@ static	char		mess[102400];
 		//No imprime los mensajes enviados por él mismo
 		printf("%s envio el mensaje\n", sender);
 		printf("%s recibió el mensaje\n", User);
-		sprintf(full_name,"#%s#%s",User,Spread_name);
-		printf("Nombre completo: %s\n", full_name);
-		if ( !strcmp(full_name,sender)){
+		
+		//sprintf(full_name,"#%s#%s",User,Spread_name);
+		//printf("Nombre completo: %s\n", full_name);
+		if ( strstr(sender,User)== null){
 			if     ( Is_unreliable_mess( service_type ) ) printf("received UNRELIABLE \n");
 			else if( Is_reliable_mess(   service_type ) ) printf("received RELIABLE \n");
 			else if( Is_fifo_mess(       service_type ) ) printf("received FIFO \n");
