@@ -223,8 +223,8 @@ static	char		mess[102400];
 		mess[ret] = 0;
 		
 		//No imprime los mensajes enviados por él mismo
-		printf("%s envio el mensaje\n", sender);
-		printf("%s recibió el mensaje\n", User);
+		//printf("%s envio el mensaje\n", sender);
+		//printf("%s recibió el mensaje\n", User);
 		
 		//sprintf(full_name,"#%s#%s",User,Spread_name);
 		//printf("Nombre completo: %s\n", full_name);
